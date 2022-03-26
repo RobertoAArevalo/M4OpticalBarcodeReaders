@@ -2,6 +2,18 @@
 public class BarcodeRead
 {
 
+    interface BarcodeIO
+{
+   public boolean scan(BarcodeImage bc);
+   public boolean readText(String text);
+   public boolean generateImageFromText();
+   public boolean translateImageToText();
+   public void displayTextToConsole();
+   public void displayImageToConsole();
+   }
+
+    
+    
     public static void main(String[] args)
     {
             String[] sImageIn =
@@ -89,16 +101,47 @@ class BarcodeImage implements Cloneable
     }
     BarcodeImage(String[] strData)
     {
-        
-        
+     int row = 0;
+      int col = 0;
+      
+      //bottom right of 2d array is MAX_HEIGHT - strData.length
+      //most left position in 2d array is [0][col]
+      //my guess for lower left is below
+      int lowerLeft = 0; 
+      for (int i = 0; i < strData.length; i++)
+      {
+  
+         for (int z = 0; z < strData[i].length();z++)
+         {
+            if ( strData[row].charAt(col) == ' ')
+            {
+               imageData[lowerLeft][col] = false;
+               col++;
+            }
+            else if ( strData[row].charAt(col) == '*')
+            {
+               imageData[lowerLeft][col] = true;
+               col++;
+            }
+         }
+         row++;
+         col=0;
+      }
+      //end of BarcodeImage(String[] strData)     
     }
     boolean getPixel(int row, int col)
     {
-        
-    }
+        boolean sendPixel = false;
+      
+       if(row <MAX_HEIGHT && col < MAX_WIDTH) //ADDING IF STATEMENT TO CHECK IF ROW AND COL ARE GOOD (within array)
+      {    
+               sendPixel = imageData[row][col];        
+      }
+     return sendPixel;
+   }
     boolean setPixel(int row, int col, boolean value)
     {
-        
+       this.imageData[row][col] = value;
     }
     private boolean checkSize(String[] data)//optional 
     {
@@ -111,6 +154,7 @@ class BarcodeImage implements Cloneable
     }
     public Object clone() throws CloneNotSupportedException
     {
+          return (Object)super.clone();
         /*  create an object 
          *  set the variables to that objects
          *  return object
