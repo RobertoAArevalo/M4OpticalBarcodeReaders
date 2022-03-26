@@ -115,12 +115,12 @@ class BarcodeImage implements Cloneable
          {
             if ( strData[row].charAt(col) == ' ')
             {
-               imageData[lowerLeft][col] = false;
+               imageData[lowerLeft + (MAX_HEIGHT - strData.length)][col] = false;
                col++;
             }
             else if ( strData[row].charAt(col) == '*')
             {
-               imageData[lowerLeft][col] = true;
+               imageData[lowerLeft + (MAX_HEIGHT - strData.length)][col] = true;
                col++;
             }
          }
