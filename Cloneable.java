@@ -4,5 +4,5 @@ public interface Cloneable
    boolean setPixel(int row, int col, boolean value);
    void checkSize(String[] data);
    void displayToConsole();
-   Object clone();
+   Object clone() throws CloneNotSupportedException;
 }
