@@ -171,7 +171,12 @@ interface BarcodeIO
     }
     public boolean readText(String text)
     {
-        
+        if(text.length() <= BarcodeImage.Max_WIDTH -1)
+        {
+           this.text = '*';
+           return true;
+        }
+        return false; 
     }
     public boolean generateImageFromText()
     {
@@ -210,12 +215,7 @@ class DataMatrix implements BarcodeIO
     }
     readText(String text)// mutator
     {
-        if(text.length() <= BarcodeImage.Max_WIDTH -1)
-        {
-           this.text = '*';
-           return true;
-        }
-        return false;
+    
     }
     scan(BarcodeImage image)
     {
