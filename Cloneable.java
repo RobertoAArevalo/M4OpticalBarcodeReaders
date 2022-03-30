@@ -1,3 +1,4 @@
+/*
 public interface Cloneable
 {
    boolean getPixel(int row, int col);
@@ -6,3 +7,4 @@ public interface Cloneable
    void displayToConsole();
    Object clone() throws CloneNotSupportedException;
 }
+ */
